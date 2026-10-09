@@ -590,7 +590,7 @@ def classify_checkin(code: Any, message: str) -> str:
 @retry_on_failure()
 def checkin_request(session: requests.Session, headers: Dict[str, str]) -> Dict[str, Any]:
     """执行签到请求（带重试）"""
-    r = session.post(CHECKIN_URL, headers=headers, data=PAYLOAD, timeout=TIMEOUT)
+    r = session.post(CHECKIN_URL, headers=headers, json=PAYLOAD, timeout=TIMEOUT)
     r.raise_for_status()
     return require_json(r)  # 非 JSON 响应抛异常进入重试（M1）
 
